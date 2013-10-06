@@ -48,12 +48,13 @@ app.get('/', function (req, res) {
 	});
 });
 
-app.get('/serial', function (req, res) {
-	console.log('cereal!');
-	serialPort.write('Words!\n', function(err, results) {
+app.get('/dish/:dish', function (req, res) {
+	console.log(req.params.dish);
+	serialPort.write(req.params.dish+'\n', function(err, results) {
 		console.log('err: ' + err);
 		console.log('results: ' + results);
 	});
+	res.send('Serial!');
 });
 
 app.listen(process.env.PORT || 5000);
