@@ -4,6 +4,8 @@
 Servo servo;
 int servoPin = 9;
 int pos = 0;
+int dishAngle = [10,30,40,60];
+int dishLED = [1,2,3,4];
 
 // Sensor variables
 int sensorPin = A0;
@@ -29,15 +31,9 @@ void setup()
 	servo.attach(servoPin);
 }
 
-void loopServo() {
-	for(pos = 0; pos < 180; pos += 1) {
-		servo.write(pos);
-		delay(15);
-	}
-	for(pos = 180; pos>=1; pos-=1) {
-		servo.write(pos);
-		delay(15);
-	}
+void observeDish(incomingByte) {
+	servo.write(dishAngle[incomingByte])
+	
 }
 
 void loop() {
@@ -46,7 +42,8 @@ void loop() {
 
 		Serial.print("I received: ");
 		Serial.println(incomingByte);
+		observeDish(incomingByte);
 	}
 	
-	loopServo();
+	
 }
