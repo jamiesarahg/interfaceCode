@@ -65,9 +65,6 @@ void loop() {
 		char incomingByte = Serial.read();
 		char command = incomingByte - '0';
 
-		Serial.print("I got this: ");
-		Serial.println(incomingByte);
-
 		if (command > -1 && command < 4)
 			observeDish(command);
 		else if (command == 4) {

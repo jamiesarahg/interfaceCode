@@ -58,14 +58,17 @@ app.put('/dish/all', function (req, res) {
 		serialData.pop(),
 		serialData.pop()
 	]);
-});
+});	
 
 app.put('/dish/:dish', function (req, res) {
 	var dish = req.params.dish;
 	if (dish < 0 || dish > 3) return;
 
 	serialPort.write(req.params.dish+'\n');
-	res.send(serialData.pop());
+
+	setTimeout(function() {
+		res.send(serialData.pop());	
+	}, 1500);
 });
 
 app.listen(3000);
