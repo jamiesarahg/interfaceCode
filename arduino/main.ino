@@ -7,7 +7,7 @@ int pos = 0;
 // Sensor variables
 int sensorPin = A0;
 // Set values
-int dishAngle[] = {0,30,60,90};
+int dishAngle[] = {32,60,100,125};
 // LEDS
 int leds[] = {13,12,11,10};
 
@@ -52,7 +52,7 @@ float averagedRange(int count) {
 float observeDish(int dishNum) {
 	digitalWrite(leds[dishNum], HIGH); 
 	servo.write(dishAngle[dishNum]);
-	delay(15);
+	delay(1500);
 	float opacity= averagedRange(20);
 	Serial.print(dishNum);
 	Serial.print("=");
