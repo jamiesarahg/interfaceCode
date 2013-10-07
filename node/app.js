@@ -57,7 +57,10 @@ app.put('/dish/:dish', function (req, res) {
 	serialPort.write(req.params.dish+'\n');
 
 	setTimeout(function() {
-		res.send(serialData.pop());	
+		var data;
+		while (serialData.length)
+			data = serialData.pop();
+		res.send(data);	
 	}, 1500);
 });
 

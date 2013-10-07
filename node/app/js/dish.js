@@ -6,8 +6,9 @@ $(document).ready(function() {
 });
 
 function bindDishButtons() {
-	$('button.dish').click(function() {
+	$('.dish').click(function() {
 		clearInterval(autoMode);
+		$('.dish-auto').removeClass('active');
 
 		var dish = $(this).attr('dish');
 
@@ -19,7 +20,10 @@ function bindDishButtons() {
 
 function bindAutoButton() {
 	$('.dish-auto').click(function() {
+		if ($('.dish-auto').hasClass('active')) return;
 		window.currentDish = 0;
+
+		$('.dish-auto').addClass('active');
 
 		autoMode = setInterval(function() {
 			var el = $('.dish-container').find('.dish-info[dish="'+currentDish+'"]');
@@ -31,12 +35,14 @@ function bindAutoButton() {
 }
 
 function dishRequest(dish, el) {
+	el.parent().addClass('active');
 	$.ajax({
 		url: '/dish/' + dish,
 		type: 'PUT',
 		success: function(res) {
 			console.log('dish' + dish + 'result: ' + res);
-			el.html(res);
+			el.html(res? res+' lux' : 'test');
+			el.parent().removeClass('active');
 		}
 	});
 }

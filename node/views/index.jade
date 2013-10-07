@@ -1,20 +1,24 @@
 extends layout
 
 block content
-	h1 this is content about a petri dish
+	h2.title Petri Dish Opacity
 	.dish-container
-		.dish
-			button.dish(dish='0') dish 0
-			.dish-info(dish='0')
-		.dish
-			button.dish(dish='1') dish 1
-			.dish-info(dish='1')
-		.dish
-			button.dish(dish='2') dish 2
-			.dish-info(dish='2')
-		.dish
-			button.dish(dish='3') dish 3
-			.dish-info(dish='3')
-		.dish
-			button.dish-auto(dish='all') auto dish
+		.dish-auto(dish='all')
+			| Cycle Mode
 			.dish-info(dish='all')
+		.dish(dish='0')
+			| Dish 1
+			.dish-info(dish='0')
+				| test
+		.dish(dish='1')
+			| Dish 2
+			.dish-info(dish='1')
+				| test
+		.dish(dish='2')
+			| Dish 3
+			.dish-info(dish='2')
+				| test
+		.dish(dish='3')
+			| Dish 4
+			.dish-info(dish='3')
+				| test
