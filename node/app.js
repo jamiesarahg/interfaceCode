@@ -48,7 +48,7 @@ app.get('/', function (req, res) {
 	});
 });
 
-app.get('/dish/:dish', function (req, res) {
+app.put('/dish/:dish', function (req, res) {
 	console.log(req.params.dish);
 	serialPort.write(req.params.dish+'\n', function(err, results) {
 		console.log('err: ' + err);
@@ -57,4 +57,4 @@ app.get('/dish/:dish', function (req, res) {
 	res.send('Serial!');
 });
 
-app.listen(process.env.PORT || 5000);
+app.listen(3000);

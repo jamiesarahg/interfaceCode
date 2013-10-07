@@ -36,7 +36,7 @@ void setup()
 	}
 }
 
-float averagedRange(int count) {
+float averagedData(int count) {
   float total = 0;
 
   for (int i = 0; i < count; i ++) {
@@ -50,31 +50,27 @@ float averagedRange(int count) {
 }
 
 float observeDish(int dishNum) {
-	digitalWrite(leds[dishNum], HIGH); 
+	digitalWrite(leds[dishNum], HIGH);
 	servo.write(dishAngle[dishNum]);
 	delay(1500);
-	float opacity= averagedRange(20);
-	Serial.print(dishNum);
-	Serial.print("=");
-	Serial.println(opacity);
-	digitalWrite(leds[dishNum], LOW); 
-
+	float opacity= averagedData(20);
+	// Serial.print(dishNum);
+	// Serial.print("=");
+	// Serial.println(opacity);
+	digitalWrite(leds[dishNum], LOW);
 }
 
 void loop() {
+	if (Serial.available() > 0) {
+		char incomingByte = Serial.read() - '0';
 
-//	if (Serial.available() > 0) {
-//		char incomingByte = Serial.read();
-
-	//	Serial.print("I received: ");
-	//	Serial.println(incomingByte);
-	
-	//	observeDish(incomingByte);	
-	//}
-
-	for (int i=0; i<4; i++) {	//for testing w/out serial
-		int incomingByte=i;
-		observeDish(incomingByte);
+		if (incomingByte > -1 && incomingByte < 4)
+			observeDish(incomingByte);
 	}
+
+	// for (int i=0; i<4; i++) {	//for testing w/out serial
+	// 	int incomingByte=i;
+	// 	observeDish(incomingByte);
+	// }
 	
 }
