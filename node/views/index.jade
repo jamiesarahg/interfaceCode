@@ -2,8 +2,19 @@ extends layout
 
 block content
 	h1 this is content about a petri dish
-	button.dish(dish='0') dish 0
-	button.dish(dish='1') dish 1
-	button.dish(dish='2') dish 2
-	button.dish(dish='3') dish 3
-	button.dish-auto(dish='all') auto dish
+	.dish-container
+		.dish
+			button.dish(dish='0') dish 0
+			.dish-info(dish='0')
+		.dish
+			button.dish(dish='1') dish 1
+			.dish-info(dish='1')
+		.dish
+			button.dish(dish='2') dish 2
+			.dish-info(dish='2')
+		.dish
+			button.dish(dish='3') dish 3
+			.dish-info(dish='3')
+		.dish
+			button.dish-auto(dish='all') auto dish
+			.dish-info(dish='all')

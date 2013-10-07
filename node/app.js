@@ -48,16 +48,6 @@ app.get('/', function (req, res) {
 	res.render('index', {
 		title : 'Home'
 	});
-});
-
-app.put('/dish/all', function (req, res) {
-	serialPort.write('4'+'\n');
-	res.send([
-		serialData.pop(),
-		serialData.pop(),
-		serialData.pop(),
-		serialData.pop()
-	]);
 });	
 
 app.put('/dish/:dish', function (req, res) {

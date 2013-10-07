@@ -1,35 +1,42 @@
 $(document).ready(function() {
 	bindDishButtons();
 	bindAutoButton();
+
+	window.autoMode = 0;
 });
 
 function bindDishButtons() {
-	$('.dish').click(function() {
-		$.ajax({
-			url: '/dish/'+$(this).attr('dish'), 
-			type: 'PUT',
-			success: function(res) {
-				console.log(res);
-			}
-		});
+	$('button.dish').click(function() {
+		clearInterval(autoMode);
+
+		var dish = $(this).attr('dish');
+
+		var el = $('.dish-container').find('.dish-info[dish="'+dish+'"]');
+
+		dishRequest($(this).attr('dish'), el);
 	});
 }
 
 function bindAutoButton() {
 	$('.dish-auto').click(function() {
-		(function loop(i) {
-			setTimeout(function() {
+		window.currentDish = 0;
 
-				$.ajax({
-					url: '/dish/' + i,
-					type: 'PUT',
-					success: function(res) {
-						console.log('result: ' + res);
-					}
-				});
+		autoMode = setInterval(function() {
+			var el = $('.dish-container').find('.dish-info[dish="'+currentDish+'"]');
+			
+			dishRequest(currentDish, el);
+			currentDish = (currentDish+1)%4;
+		}, 1500);
+	});
+}
 
-				loop(i? i-1 : 3);
-			}, 1500);
-		})(3);
+function dishRequest(dish, el) {
+	$.ajax({
+		url: '/dish/' + dish,
+		type: 'PUT',
+		success: function(res) {
+			console.log('dish' + dish + 'result: ' + res);
+			el.html(res);
+		}
 	});
 }
