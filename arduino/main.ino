@@ -52,25 +52,29 @@ float averagedData(int count) {
 float observeDish(int dishNum) {
 	digitalWrite(leds[dishNum], HIGH);
 	servo.write(dishAngle[dishNum]);
-	delay(1500);
-	float opacity= averagedData(20);
-	// Serial.print(dishNum);
-	// Serial.print("=");
-	// Serial.println(opacity);
+	delay(500);
+
+	float opacity = averagedData(20);
+	delay(500);
+	Serial.println(opacity);
 	digitalWrite(leds[dishNum], LOW);
 }
 
 void loop() {
 	if (Serial.available() > 0) {
-		char incomingByte = Serial.read() - '0';
+		char incomingByte = Serial.read();
+		char command = incomingByte - '0';
 
-		if (incomingByte > -1 && incomingByte < 4)
-			observeDish(incomingByte);
+		Serial.print("I got this: ");
+		Serial.println(incomingByte);
+
+		if (command > -1 && command < 4)
+			observeDish(command);
+		else if (command == 4) {
+			for (int i=0; i<4; i++) {
+				observeDish(i);
+			}
+		}
 	}
-
-	// for (int i=0; i<4; i++) {	//for testing w/out serial
-	// 	int incomingByte=i;
-	// 	observeDish(incomingByte);
-	// }
 	
 }

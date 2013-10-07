@@ -7,8 +7,8 @@ function bindDishButtons() {
 		$.ajax({
 			url: '/dish/'+$(this).attr('dish'), 
 			type: 'PUT',
-			success: function() {
-				
+			success: function(res) {
+				console.log(res);
 			}
 		});
 	});

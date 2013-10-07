@@ -34,27 +34,38 @@ var serialPort = new SerialPort("/dev/tty.usbmodem1421", {
 	parser: serialport.parsers.readline("\n")
 });
 
+serialData = [];
+
 serialPort.on('open', function () {
 	serialPort.on('data', function(data) {
 		console.log('data: ' + data);
+		serialData.unshift(data);
 	});
 });
 
 // Routes
 app.get('/', function (req, res) {
-	console.log('home!');
 	res.render('index', {
 		title : 'Home'
 	});
 });
 
+app.put('/dish/all', function (req, res) {
+	serialPort.write('4'+'\n');
+	res.send([
+		serialData.pop(),
+		serialData.pop(),
+		serialData.pop(),
+		serialData.pop()
+	]);
+});
+
 app.put('/dish/:dish', function (req, res) {
-	console.log(req.params.dish);
-	serialPort.write(req.params.dish+'\n', function(err, results) {
-		console.log('err: ' + err);
-		console.log('results: ' + results);
-	});
-	res.send('Serial!');
+	var dish = req.params.dish;
+	if (dish < 0 || dish > 3) return;
+
+	serialPort.write(req.params.dish+'\n');
+	res.send(serialData.pop());
 });
 
 app.listen(3000);
