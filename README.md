@@ -48,5 +48,9 @@ The [jade](https://github.com/visionmedia/jade) templates and [stylus](https://g
 It worked! Clicking a button caused the servo to turn to the corresponding dish and take a measurement. With the right port forwarding, this thing could take commands from the world wide web!
 
 ![The scanner in action!](img/demo-light.jpg)
+
+
 It works best in the dark.
+
+
 ![The scanner in action!](img/demo-dark.jpg)
