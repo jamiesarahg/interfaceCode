@@ -13,7 +13,7 @@ The Arduino code is in the arduino folder. The node server receives the request 
 
 ## Node
 
-The node code is in the node folder. We used [express](https://github.com/visionmedia/express) for routing, as well as [node-serialport](https://github.com/voodootikigod/node-serialport) for serial communication.
+The node code is in the node folder. We used [express](https://github.com/visionmedia/express) for routing, as well as [node-serialport](https://github.com/voodootikigod/node-serialport) for serial communication. We chose to use node over python because it's simpler to make a simple user interface with HTML than with some python library that we didn't already know how to use coming into the project.
 
 ### "Hardware API"
 
@@ -37,4 +37,16 @@ All the frontend logic is in `node/app/js/dish.js`. We bound click events to the
 - It simplified the API to a single route.
 - It allowed us to gather data in automatic mode without pause. If we have a request for each dish, we have a response for each dish, which makes data collection straightforward. We don't have to deal with data coming in at arbitrary times with no request callback waiting for it.
 
-The [jade](https://github.com/visionmedia/jade) templates and [stylus](https://github.com/LearnBoost/stylus) stylesheets are outside the scope of this project, but I'm just mentioning them because I think they're awesome. 
+And the original motivation for using node was validated! We quickly created a clean, straightforward user interface for the device.
+
+![Automated petri dish tester user interface](img/UI.png)
+
+The [jade](https://github.com/visionmedia/jade) templates and [stylus](https://github.com/LearnBoost/stylus) stylesheets are outside the scope of this project, but I'm just mentioning them because I think the languages are awesome. 
+
+## Results
+
+It worked! Clicking a button caused the servo to turn to the corresponding dish and take a measurement. With the right port forwarding, this thing could take commands from the world wide web!
+
+![The scanner in action!](img/demo-light.jpg)
+It works best in the dark.
+![The scanner in action!](img/demo-dark.jpg)
