@@ -1,4 +1,5 @@
-$(document).ready(function() {
+//Button Binding
+/$(document).ready(function() {
 	bindDishButtons();
 	bindAutoButton();
 
